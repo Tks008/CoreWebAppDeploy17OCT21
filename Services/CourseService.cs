@@ -23,9 +23,9 @@ namespace CoreWebAppDeploy1.Services
             //    _builder.Password = db_password;
             //    _builder.InitialCatalog = db_database;
               return new SqlConnection(connectionstring);
-            }
+            } 
             public IEnumerable<Models.Course> GetCourses(string connectionstring)
-        {
+             {
             List<Course> _lst = new List<Course>();
             string _statement = "SELECT Id,Name,rating from Course";
              SqlConnection _connection = GetConnection(connectionstring);
