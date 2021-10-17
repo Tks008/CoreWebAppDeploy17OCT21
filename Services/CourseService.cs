@@ -9,30 +9,30 @@ namespace CoreWebAppDeploy1.Services
 {
     public class CourseService
     {
-        private static string db_source = "tkssqlserver.database.windows.net";
-        private static string db_user = "tks007";
-        private static string db_password = "Tksantra@123";
-        private static string db_database = "tksDatabase";
+        //private static string db_source = "tkssqlserver.database.windows.net";
+        //private static string db_user = "tks007";
+        //private static string db_password = "Tksantra@123";
+        //private static string db_database = "tksDatabase";
 
-        private SqlConnection GetConnection()
+        private SqlConnection GetConnection(string connectionstring)
         {
-            // Here we are creating the SQL connection
-            var _builder = new SqlConnectionStringBuilder();
-            _builder.DataSource = db_source;
-            _builder.UserID = db_user;
-            _builder.Password = db_password;
-            _builder.InitialCatalog = db_database;
-            return new SqlConnection(_builder.ConnectionString);
-        }
-        public IEnumerable<Models.Course> GetCourses(SqlConnection sqlConnection)
+            //    // Here we are creating the SQL connection
+            //    var _builder = new SqlConnectionStringBuilder();
+            //    _builder.DataSource = db_source;
+            //    _builder.UserID = db_user;
+            //    _builder.Password = db_password;
+            //    _builder.InitialCatalog = db_database;
+              return new SqlConnection(connectionstring);
+            }
+            public IEnumerable<Models.Course> GetCourses(string connectionstring)
         {
             List<Course> _lst = new List<Course>();
             string _statement = "SELECT Id,Name,rating from Course";
-            SqlConnection _connection = GetConnection();
+             SqlConnection _connection = GetConnection(connectionstring);
             // Let's open the connection
             _connection.Open();
             // We then construct the statement of getting the data from the Course table
-            SqlCommand _sqlcommand = new SqlCommand(_statement, sqlConnection);
+            SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
             // Using the SqlDataReader class , we will read all the data from the Course table
             using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
             {
